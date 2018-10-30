@@ -45,10 +45,20 @@
         android:text="确定" />
 
     <TextView
+        android:id="@+id/constant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        android:text="目标打卡时间为"/>
+
+    <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:textColor="@android:color/black"
         android:textSize="17sp" />

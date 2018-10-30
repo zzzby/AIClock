@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class RequestSuggestionService extends Service {
 
-    private static final String TAG = "RequestSuggestionService";
+    private static final String TAG = "RequestService";
     AlarmManager manager;
     boolean stopAlarm = false;
 

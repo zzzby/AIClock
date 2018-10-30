@@ -29,14 +29,14 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 
     private DatePicker datePicker;
     private TimePicker timePicker;
     Button confirm, cancel;
-    TextView textView;
+    TextView time, constant;
     Calendar calendar;
 
     @Override
@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         timePicker = findViewById(R.id.time_picker);
         confirm = findViewById(R.id.confirm);
         cancel = findViewById(R.id.cancel);
-        textView = findViewById(R.id.time);
+        time = findViewById(R.id.time);
+        constant = findViewById(R.id.constant);
         // 这里的calender需要先初始化成当前时间，因为用户可能没有动datePicker和timePicker
         calendar = Calendar.getInstance();
 
@@ -75,14 +76,15 @@ public class MainActivity extends AppCompatActivity {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
                 String temp = format.format(calendar.getTime()) + "  " +
                         calendar.get(Calendar.HOUR_OF_DAY) + "时" + calendar.get(Calendar.MINUTE) + "分";
-                textView.setText("        目标打卡时间为\n" + temp);
+                time.setText(temp);
                 // calendar保存着目标打卡时间
 //                querySuggestions(calendar.getTimeInMillis() / 1000);
-                Toast.makeText(MainActivity.this, "闹钟设置成功，请保持网络畅通", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "闹钟设置成功，请保持网络畅通", Toast.LENGTH_LONG).show();
 //                Log.i(TAG, "onClick: " + calendar.getTimeInMillis() / 1000);
 
                 confirm.setVisibility(View.GONE);
-                textView.setVisibility(View.VISIBLE);
+                time.setVisibility(View.VISIBLE);
+                constant.setVisibility(View.VISIBLE);
                 cancel.setVisibility(View.VISIBLE);
 
                 // 设置一个定时器，当距离打卡时间还有90分钟时触发service
@@ -116,8 +118,9 @@ public class MainActivity extends AppCompatActivity {
                 stopService(intent);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.cancel(pendingIntent);
-                textView.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, "闹钟已取消", Toast.LENGTH_SHORT).show();
+                time.setVisibility(View.GONE);
+                constant.setVisibility(View.GONE);
+                Toast.makeText(MainActivity.this, "闹钟已取消", Toast.LENGTH_LONG).show();
             }
         });
     }
